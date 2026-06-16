@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS — Beyond the Horizon</title>
+    <meta name="description" content="Next-generation technology solutions engineered for the frontier of tomorrow.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --void: #03050D;
+            --deep: #070C1A;
+            --navy: #0A1228;
+            --panel: #0D1630;
+            --accent: #00D4FF;
+            --accent2: #7B5EFF;
+            --accent3: #FF3D6B;
+            --glow: rgba(0, 212, 255, 0.18);
+            --glow2: rgba(123, 94, 255, 0.14);
+            --text: #E8EDF8;
+            --muted: #7B8BAD;
+            --line: rgba(255, 255, 255, 0.07);
+            --font-display: 'Space Grotesk', sans-serif;
+            --font-mono: 'Space Mono', monospace;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--void);
+            color: var(--text);
+            font-family: var(--font-display);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── STAR CANVAS ── */
+        #stars-canvas {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ── GRID OVERLAY ── */
+        .grid-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 3rem;
+            background: rgba(3, 5, 13, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--line);
+            transition: background 0.3s;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 32px;
+            height: 32px;
+            position: relative;
+        }
+
+        .nav-logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .nav-logo-text {
+            font-family: var(--font-mono);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            letter-spacing: 0.08em;
+            color: var(--accent) !important;
+            border: 1px solid rgba(0, 212, 255, 0.35) !important;
+            padding: 0.45rem 1.1rem;
+            border-radius: 3px;
+            transition: background 0.2s, color 0.2s !important;
+        }
+
+        .nav-cta:hover {
+            background: rgba(0, 212, 255, 0.12) !important;
+            color: #fff !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 1.5px;
+            background: var(--muted);
+            transition: 0.3s;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            overflow: hidden;
+        }
+
+        .hero-glow {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(0, 212, 255, 0.07) 0%, rgba(123, 94, 255, 0.05) 40%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-glow2 {
+            position: absolute;
+            top: 60%;
+            left: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(123, 94, 255, 0.06) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Orbiting ring SVG */
+        .hero-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: min(700px, 90vw);
+            height: min(700px, 90vw);
+            pointer-events: none;
+            opacity: 0.15;
+            animation: slow-spin 40s linear infinite;
+        }
+
+        @keyframes slow-spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            padding: 0.4rem 0.9rem;
+            border-radius: 2px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .hero-badge::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scale(0.7);
+            }
+        }
+
+        .hero-company {
+            font-family: var(--font-mono);
+            font-size: clamp(3.5rem, 10vw, 8rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 0.4rem;
+            background: linear-gradient(135deg, #fff 30%, var(--accent) 70%, var(--accent2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-tagline-line {
+            font-family: var(--font-display);
+            font-size: clamp(0.75rem, 1.5vw, 1rem);
+            font-weight: 300;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-headline {
+            font-size: clamp(1.6rem, 4vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.15;
+            max-width: 700px;
+            margin: 0 auto 1.5rem;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-headline em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+            color: var(--muted);
+            max-width: 520px;
+            margin: 0 auto 3rem;
+            line-height: 1.75;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 5rem;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent);
+            color: #000;
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            border-radius: 3px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #22E0FF;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: transparent;
+            color: var(--text);
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            padding: 0.85rem 2rem;
+            border-radius: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            cursor: pointer;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* scroll indicator */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.4rem;
+            z-index: 2;
+        }
+
+        .scroll-hint span {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: scroll-drop 1.8s ease-in-out infinite;
+        }
+
+        @keyframes scroll-drop {
+            0% {
+                transform: scaleY(0);
+                transform-origin: top;
+                opacity: 1;
+            }
+
+            60% {
+                transform: scaleY(1);
+                transform-origin: top;
+                opacity: 1;
+            }
+
+            100% {
+                transform: scaleY(1);
+                transform-origin: bottom;
+                opacity: 0;
+            }
+        }
+
+        /* ── SECTION SHARED ── */
+        section {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-eyebrow {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 600;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-body {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 540px;
+            line-height: 1.75;
+        }
+
+        /* divider line */
+        .h-rule {
+            border: none;
+            border-top: 1px solid var(--line);
+            margin: 0;
+        }
+
+        /* ── STATS BAND ── */
+        .stats-band {
+            background: var(--panel);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .stats-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {}
+
+        .stat-num {
+            font-family: var(--font-mono);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.4rem;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--muted);
+        }
+
+        /* ── CAPABILITIES GRID ── */
+        .capabilities {
+            background: var(--void);
+        }
+
+        .cap-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1px;
+            margin-top: 4rem;
+            border: 1px solid var(--line);
+        }
+
+        .cap-card {
+            background: var(--deep);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .cap-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .cap-card:hover {
+            background: var(--panel);
+        }
+
+        .cap-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .cap-icon {
+            width: 44px;
+            height: 44px;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .cap-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cap-num {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            color: rgba(0, 212, 255, 0.3);
+            margin-bottom: 0.75rem;
+        }
+
+        .cap-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.01em;
+        }
+
+        .cap-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        /* ── FEATURE SPLIT ── */
+        .feature-split {
+            background: var(--deep);
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .split-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .split-visual {
+            position: relative;
+            aspect-ratio: 1 / 1;
+        }
+
+        /* Animated orbit diagram */
+        .orbit-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .orbit-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.4), rgba(0, 212, 255, 0.05));
+            border: 1px solid rgba(0, 212, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .orbit-core-inner {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            opacity: 0.9;
+        }
+
+        .orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+
+        .orbit-ring-1 {
+            width: 180px;
+            height: 180px;
+            transform: translate(-50%, -50%);
+            animation: orbit-spin 12s linear infinite;
+        }
+
+        .orbit-ring-2 {
+            width: 280px;
+            height: 280px;
+            transform: translate(-50%, -50%);
+            animation: orbit-spin 22s linear infinite reverse;
+        }
+
+        .orbit-ring-3 {
+            width: 380px;
+            height: 380px;
+            transform: translate(-50%, -50%);
+            animation: orbit-spin 35s linear infinite;
+        }
+
+        @keyframes orbit-spin {
+            from {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .orbit-dot {
+            position: absolute;
+            border-radius: 50%;
+        }
+
+        .orbit-dot-1 {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 12px rgba(0, 212, 255, 0.8);
+        }
+
+        .orbit-dot-2 {
+            width: 8px;
+            height: 8px;
+            background: var(--accent2);
+            top: 50%;
+            right: 0;
+            transform: translate(50%, -50%);
+            box-shadow: 0 0 10px rgba(123, 94, 255, 0.8);
+        }
+
+        .orbit-dot-3 {
+            width: 12px;
+            height: 12px;
+            background: var(--accent3);
+            bottom: 10%;
+            left: 15%;
+            box-shadow: 0 0 14px rgba(255, 61, 107, 0.8);
+        }
+
+        /* ── PROCESS TIMELINE ── */
+        .process {
+            background: var(--void);
+        }
+
+        .process-steps {
+            margin-top: 4rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 80px 1px 1fr;
+            gap: 0 2rem;
+            position: relative;
+        }
+
+        .step-number {
+            font-family: var(--font-mono);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgba(0, 212, 255, 0.15);
+            line-height: 1;
+            padding-top: 0.15rem;
+            text-align: right;
+            transition: color 0.3s;
+        }
+
+        .process-step:hover .step-number {
+            color: rgba(0, 212, 255, 0.5);
+        }
+
+        .step-line-col {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--panel);
+            border: 2px solid rgba(0, 212, 255, 0.4);
+            flex-shrink: 0;
+            margin-top: 0.3rem;
+            transition: background 0.3s, border-color 0.3s;
+        }
+
+        .process-step:hover .step-dot {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .step-connector {
+            flex: 1;
+            width: 1px;
+            background: var(--line);
+            margin: 6px 0;
+        }
+
+        .process-step:last-child .step-connector {
+            display: none;
+        }
+
+        .step-content {
+            padding: 0 0 3rem;
+        }
+
+        .step-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+
+        .step-desc {
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.7;
+            max-width: 480px;
+        }
+
+        /* ── CTA SECTION ── */
+        .cta-section {
+            background: var(--deep);
+            border-top: 1px solid var(--line);
+        }
+
+        .cta-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 7rem 2rem;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-title em {
+            font-style: normal;
+            color: var(--accent);
+        }
+
+        .cta-sub {
+            font-size: 1rem;
+            color: var(--muted);
+            max-width: 440px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.75;
+        }
+
+        /* contact form */
+        .contact-form {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-form input[type="email"] {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+            padding: 0.85rem 1.25rem;
+            color: var(--text);
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            width: 280px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input[type="email"]::placeholder {
+            color: var(--muted);
+        }
+
+        .contact-form input[type="email"]:focus {
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+
+        .form-note {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            color: rgba(123, 139, 173, 0.5);
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--void);
+            border-top: 1px solid var(--line);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-mono);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-copy {
+            font-family: var(--font-mono);
+            font-size: 0.65rem;
+            color: rgba(123, 139, 173, 0.45);
+            letter-spacing: 0.1em;
+            width: 100%;
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--line);
+            margin-top: 1rem;
+        }
+
+        /* ── REVEAL ANIMATIONS ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .reveal-delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .reveal-delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .reveal-delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .reveal-delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.25rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 56px;
+                left: 0;
+                right: 0;
+                background: rgba(3, 5, 13, 0.97);
+                backdrop-filter: blur(20px);
+                padding: 2rem 1.5rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--line);
+            }
+
+            .nav-links.open a {
+                font-size: 0.9rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .split-inner {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .split-visual {
+                display: none;
+            }
+
+            .cap-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                grid-template-columns: 48px 1px 1fr;
+                gap: 0 1rem;
+            }
+
+            .step-number {
+                font-size: 1.6rem;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="stars-canvas" aria-hidden="true"></canvas>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <!-- NAV -->
+    <nav role="banner">
+        <a href="#" class="nav-logo" aria-label="Nexus home">
+            <div class="nav-logo-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <polygon points="16,2 30,24 2,24" fill="none" stroke="#00D4FF" stroke-width="1.5" />
+                    <polygon points="16,9 24,22 8,22" fill="rgba(0,212,255,0.15)" stroke="#00D4FF" stroke-width="1" />
+                    <circle cx="16" cy="16" r="2" fill="#00D4FF" />
+                </svg>
+            </div>
+            <span class="nav-logo-text">NEXUS</span>
+        </a>
+        <ul class="nav-links" id="nav-menu">
+            <li><a href="#capabilities">Capabilities</a></li>
+            <li><a href="#process">Process</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact" class="nav-cta">Launch →</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-heading">
+
+        <!-- decorative ring -->
+        <svg class="hero-ring" aria-hidden="true" viewBox="0 0 700 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="350" cy="350" rx="340" ry="340" stroke="#00D4FF" stroke-width="0.5" stroke-dasharray="4 8" />
+            <ellipse cx="350" cy="350" rx="260" ry="260" stroke="#7B5EFF" stroke-width="0.5" stroke-dasharray="2 12" />
+            <ellipse cx="350" cy="350" rx="180" ry="180" stroke="#00D4FF" stroke-width="0.5" />
+        </svg>
+
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-glow2" aria-hidden="true"></div>
+
+        <div class="hero-badge" aria-label="Status: Mission active">Mission Active</div>
+
+        <h1 class="hero-company" id="hero-heading">NEXUS</h1>
+        <p class="hero-tagline-line">Beyond the Horizon</p>
+
+        <h2 class="hero-headline">
+            Engineering the <em>next frontier</em><br>of human capability
+        </h2>
+
+        <p class="hero-sub">
+            Next-generation technology solutions built for organizations that refuse to wait for the future to arrive.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#contact" class="btn-primary">
+                Begin Mission
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+            <a href="#capabilities" class="btn-secondary">View Capabilities</a>
+        </div>
+
+        <div class="scroll-hint" aria-hidden="true">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- STATS BAND -->
+    <div class="stats-band" aria-label="Key metrics">
+        <div class="stats-inner">
+            <div class="stat-item reveal">
+                <div class="stat-num" id="stat1">0</div>
+                <div class="stat-label">Projects Launched</div>
+            </div>
+            <div class="stat-item reveal reveal-delay-1">
+                <div class="stat-num" id="stat2">0</div>
+                <div class="stat-label">Countries Reached</div>
+            </div>
+            <div class="stat-item reveal reveal-delay-2">
+                <div class="stat-num" id="stat3">0</div>
+                <div class="stat-label">Terabytes Processed</div>
+            </div>
+            <div class="stat-item reveal reveal-delay-3">
+                <div class="stat-num" id="stat4">0%</div>
+                <div class="stat-label">Uptime SLA</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CAPABILITIES -->
+    <section class="capabilities" id="capabilities" aria-labelledby="cap-heading">
+        <div class="section-inner">
+            <p class="section-eyebrow reveal">// System capabilities</p>
+            <h2 class="section-title reveal" id="cap-heading">Built for<br>the edge of possible</h2>
+            <p class="section-body reveal">Every module engineered to operate at the intersection of performance,
+                intelligence, and scale.</p>
+
+            <div class="cap-grid" role="list">
+
+                <div class="cap-card reveal" role="listitem">
+                    <div class="cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="10" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="0.75"
+                                stroke-dasharray="3 5" />
+                            <circle cx="22" cy="4" r="2.5" fill="currentColor" />
+                            <circle cx="40" cy="22" r="2.5" fill="currentColor" />
+                            <circle cx="22" cy="40" r="2.5" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="cap-num">01</div>
+                    <h3 class="cap-title">Orbital Intelligence</h3>
+                    <p class="cap-desc">AI systems that see across data horizons — pattern recognition, predictive
+                        modeling, and real-time inference at planetary scale.</p>
+                </div>
+
+                <div class="cap-card reveal reveal-delay-1" role="listitem">
+                    <div class="cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="6" y="6" width="32" height="32" rx="2" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M6 16h32M16 6v32" stroke="currentColor" stroke-width="0.75" />
+                            <circle cx="30" cy="30" r="4" fill="currentColor" opacity="0.6" />
+                            <path d="M14 24l4-4 4 4 6-6" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="cap-num">02</div>
+                    <h3 class="cap-title">Data Architecture</h3>
+                    <p class="cap-desc">Distributed infrastructure that ingests, transforms, and serves structured and
+                        unstructured data with sub-millisecond latency.</p>
+                </div>
+
+                <div class="cap-card reveal reveal-delay-2" role="listitem">
+                    <div class="cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 4L38 13v18L22 40 6 31V13L22 4z" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M22 4v36M6 13l16 9 16-9" stroke="currentColor" stroke-width="0.75" opacity="0.5" />
+                            <circle cx="22" cy="22" r="4" fill="currentColor" opacity="0.7" />
+                        </svg>
+                    </div>
+                    <div class="cap-num">03</div>
+                    <h3 class="cap-title">Secure Enclave</h3>
+                    <p class="cap-desc">Zero-trust security architecture with end-to-end encryption, air-gapped compute
+                        options, and continuous threat monitoring.</p>
+                </div>
+
+                <div class="cap-card reveal" role="listitem">
+                    <div class="cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="22" cy="22" r="6" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="8" cy="10" r="4" stroke="currentColor" stroke-width="1.2" />
+                            <circle cx="36" cy="10" r="4" stroke="currentColor" stroke-width="1.2" />
+                            <circle cx="8" cy="34" r="4" stroke="currentColor" stroke-width="1.2" />
+                            <circle cx="36" cy="34" r="4" stroke="currentColor" stroke-width="1.2" />
+                            <path d="M12 12l6 6M26 26l6 6M32 12l-6 6M18 26l-6 6" stroke="currentColor"
+                                stroke-width="0.75" opacity="0.5" />
+                        </svg>
+                    </div>
+                    <div class="cap-num">04</div>
+                    <h3 class="cap-title">Neural Mesh</h3>
+                    <p class="cap-desc">Federated model training across distributed nodes — collaborative learning
+                        without centralizing sensitive data.</p>
+                </div>
+
+                <div class="cap-card reveal reveal-delay-1" role="listitem">
+                    <div class="cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 34L22 10l12 24" stroke="currentColor" stroke-width="1.5"
+                                stroke-linejoin="round" />
+                            <path d="M14 26h16" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M6 38h32" stroke="currentColor" stroke-width="0.75" opacity="0.4" />
+                            <circle cx="22" cy="10" r="2" fill="currentColor" />
+                        </svg>
+                    </div>
+                    <div class="cap-num">05</div>
+                    <h3 class="cap-title">Launch Velocity</h3>
+                    <p class="cap-desc">From architecture to production in weeks, not months. Composable frameworks that
+                        compress your time-to-market without cutting corners.</p>
+                </div>
+
+                <div class="cap-card reveal reveal-delay-2" role="listitem">
+                    <div class="cap-icon" aria-hidden="true">
+                        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 6v6M22 32v6M6 22h6M32 22h6" stroke="currentColor" stroke-width="1.5"
+                                stroke-linecap="round" />
+                            <circle cx="22" cy="22" r="8" stroke="currentColor" stroke-width="1.5" />
+                            <circle cx="22" cy="22" r="3" fill="currentColor" />
+                            <path d="M10 10l4 4M30 30l4 4M10 34l4-4M30 14l4-4" stroke="currentColor" stroke-width="0.75"
+                                opacity="0.4" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="cap-num">06</div>
+                    <h3 class="cap-title">Precision Analytics</h3>
+                    <p class="cap-desc">Embedded observability across every layer — real-time dashboards, anomaly
+                        detection, and automated root-cause analysis.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <hr class="h-rule">
+
+    <!-- FEATURE SPLIT -->
+    <section class="feature-split" id="about" aria-labelledby="feature-heading">
+        <div class="split-inner">
+            <div class="split-text">
+                <p class="section-eyebrow reveal">// Core architecture</p>
+                <h2 class="section-title reveal" id="feature-heading">Systems designed<br>to orbit each other</h2>
+                <p class="section-body reveal" style="margin-bottom:2rem">
+                    Every component of the NEXUS platform is purpose-built to work in concert — a tightly integrated set
+                    of modules that amplify one another rather than create friction.
+                </p>
+                <ul class="reveal" style="list-style:none; display:flex; flex-direction:column; gap:1rem;">
+                    <li style="display:flex; align-items:flex-start; gap:0.75rem;">
+                        <span
+                            style="color:var(--accent); font-size:1.2rem; line-height:1; margin-top:0.1rem; flex-shrink:0;">→</span>
+                        <span style="font-size:0.88rem; color:var(--muted); line-height:1.6">Event-driven microservices
+                            with automatic failover and self-healing topology</span>
+                    </li>
+                    <li style="display:flex; align-items:flex-start; gap:0.75rem;">
+                        <span
+                            style="color:var(--accent); font-size:1.2rem; line-height:1; margin-top:0.1rem; flex-shrink:0;">→</span>
+                        <span style="font-size:0.88rem; color:var(--muted); line-height:1.6">Edge-first compute model
+                            that reduces round-trip latency to under 10ms globally</span>
+                    </li>
+                    <li style="display:flex; align-items:flex-start; gap:0.75rem;">
+                        <span
+                            style="color:var(--accent); font-size:1.2rem; line-height:1; margin-top:0.1rem; flex-shrink:0;">→</span>
+                        <span style="font-size:0.88rem; color:var(--muted); line-height:1.6">Unified API surface that
+                            collapses complexity without sacrificing control</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="split-visual" aria-hidden="true">
+                <div class="orbit-container">
+                    <div class="orbit-core">
+                        <div class="orbit-core-inner"></div>
+                    </div>
+                    <div class="orbit-ring orbit-ring-1">
+                        <div class="orbit-dot orbit-dot-1"></div>
+                    </div>
+                    <div class="orbit-ring orbit-ring-2">
+                        <div class="orbit-dot orbit-dot-2"></div>
+                    </div>
+                    <div class="orbit-ring orbit-ring-3">
+                        <div class="orbit-dot orbit-dot-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="process" id="process" aria-labelledby="process-heading">
+        <div class="section-inner">
+            <p class="section-eyebrow reveal">// Launch sequence</p>
+            <h2 class="section-title reveal" id="process-heading">From orbit to impact</h2>
+
+            <div class="process-steps" role="list">
+
+                <div class="process-step reveal" role="listitem">
+                    <div class="step-number" aria-hidden="true">01</div>
+                    <div class="step-line-col" aria-hidden="true">
+                        <div class="step-dot"></div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-label">Reconnaissance</h3>
+                        <p class="step-desc">We map your current systems, data flows, and organizational constraints
+                            before writing a single line of code. Understanding the terrain is non-negotiable.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal" role="listitem">
+                    <div class="step-number" aria-hidden="true">02</div>
+                    <div class="step-line-col" aria-hidden="true">
+                        <div class="step-dot"></div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-label">Architecture</h3>
+                        <p class="step-desc">System design that accounts for where you are today and where you intend to
+                            be in three years — scalable by default, not as an afterthought.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal" role="listitem">
+                    <div class="step-number" aria-hidden="true">03</div>
+                    <div class="step-line-col" aria-hidden="true">
+                        <div class="step-dot"></div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-label">Ignition</h3>
+                        <p class="step-desc">Rapid build cycles with continuous integration. You see working software
+                            every two weeks, not after six months of silence.</p>
+                    </div>
+                </div>
+
+                <div class="process-step reveal" role="listitem">
+                    <div class="step-number" aria-hidden="true">04</div>
+                    <div class="step-line-col" aria-hidden="true">
+                        <div class="step-dot"></div>
+                        <div class="step-connector"></div>
+                    </div>
+                    <div class="step-content">
+                        <h3 class="step-label">Orbit</h3>
+                        <p class="step-desc">Live deployment with full observability. We remain mission control for 90
+                            days post-launch — monitoring, iterating, and guaranteeing your altitude.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="contact" aria-labelledby="cta-heading">
+        <div class="cta-inner">
+            <p class="section-eyebrow reveal" style="margin-bottom:1.5rem">// Begin mission</p>
+            <h2 class="cta-title reveal" id="cta-heading">Ready to push past<br>the <em>event horizon?</em></h2>
+            <p class="cta-sub reveal">Share your coordinates and we'll be in touch within 24 hours. No decks, no sales
+                calls — just a direct conversation about your mission.</p>
+
+            <form class="contact-form reveal" id="contact-form" novalidate aria-label="Contact form">
+                <input type="email" id="email-input" placeholder="your@email.com" autocomplete="email"
+                    aria-label="Your email address" required>
+                <button type="submit" class="btn-primary" aria-label="Submit email">
+                    Initiate Contact
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                        <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </form>
+
+            <p class="form-note reveal reveal-delay-1" id="form-status">No unsolicited communications. Ever.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo">NEXUS</div>
+            <ul class="footer-links">
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#process">Process</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-inner" style="padding-top:0">
+            <p class="footer-copy">© 2025 NEXUS. All rights reserved. — Replace this with your company name and details.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        /* ── STARS ── */
+        (function () {
+            const canvas = document.getElementById('stars-canvas');
+            const ctx = canvas.getContext('2d');
+            let W, H, stars;
+
+            function resize() {
+                W = canvas.width = window.innerWidth;
+                H = canvas.height = window.innerHeight;
+            }
+
+            function buildStars(n) {
+                stars = Array.from({ length: n }, () => ({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: Math.random() * 1.2 + 0.2,
+                    a: Math.random(),
+                    speed: Math.random() * 0.3 + 0.05,
+                    twinkleOffset: Math.random() * Math.PI * 2
+                }));
+            }
+
+            let t = 0;
+            function draw() {
+                ctx.clearRect(0, 0, W, H);
+                t += 0.008;
+                stars.forEach(s => {
+                    const alpha = (s.a * 0.6) + 0.4 * Math.sin(t * s.speed + s.twinkleOffset) * 0.5 + 0.5;
+                    ctx.beginPath();
+                    ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(200,220,255,${Math.max(0, Math.min(1, alpha))})`;
+                    ctx.fill();
+                });
+                requestAnimationFrame(draw);
+            }
+
+            resize();
+            buildStars(220);
+            draw();
+            window.addEventListener('resize', () => { resize(); buildStars(220); });
+        })();
+
+        /* ── HAMBURGER ── */
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            const open = navMenu.classList.toggle('open');
+            hamburger.setAttribute('aria-expanded', open);
+        });
+        navMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => { navMenu.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); });
+        });
+
+        /* ── REVEAL ON SCROLL ── */
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ── COUNT-UP STATS ── */
+        function countUp(el, target, suffix, duration) {
+            let start = null;
+            const step = ts => {
+                if (!start) start = ts;
+                const progress = Math.min((ts - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(ease * target);
+                el.textContent = current + suffix;
+                if (progress < 1) requestAnimationFrame(step);
+                else el.textContent = target + suffix;
+            };
+            requestAnimationFrame(step);
+        }
+
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    statsObserver.unobserve(e.target);
+                    countUp(document.getElementById('stat1'), 140, '+', 1800);
+                    countUp(document.getElementById('stat2'), 38, '', 1600);
+                    countUp(document.getElementById('stat3'), 4, 'PB', 1400);
+                    countUp(document.getElementById('stat4'), 99, '.9%', 2000);
+                }
+            });
+        }, { threshold: 0.4 });
+        const statBand = document.querySelector('.stats-band');
+        if (statBand) statsObserver.observe(statBand);
+
+        /* ── FORM ── */
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('form-status');
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+            const email = document.getElementById('email-input').value.trim();
+            if (!email || !email.includes('@')) {
+                status.textContent = 'Please enter a valid email address.';
+                status.style.color = '#FF3D6B';
+                return;
+            }
+            status.textContent = '✓ Transmission received. Expect contact within 24 hours.';
+            status.style.color = '#00D4FF';
+            document.getElementById('email-input').value = '';
+        });
+
+        /* ── NAV BG on scroll ── */
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.style.background = window.scrollY > 60 ? 'rgba(3,5,13,0.95)' : 'rgba(3,5,13,0.7)';
+        }, { passive: true });
+    </script>
+</body>
+
+</html>
